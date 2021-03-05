@@ -24,7 +24,7 @@ const scenarioSchema = new Schema({
     kayDestination: [{
         type:Array
     }],
-    children: conversationSchema
+    children: conversationSchema // ??? need to check if needed here
 })
 
 module.exports = model('scenarios', scenarioSchema);
