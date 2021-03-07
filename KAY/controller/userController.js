@@ -31,8 +31,6 @@ exports.userController = {
             res.status(500).send(err)
         }
     },
-
-    // Need to check this with fetch from front side
     async setUser(req, res) {
         console.log(`req.body:${JSON.stringify(req.body)}`)
         try {

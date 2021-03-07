@@ -13,7 +13,7 @@ const locationSchema = new Schema({
         type: Number,
         required: true
     },
-    xFromCurrPosition: {
+    yFromCurrPosition: {
         type: Number,
         required: true
     }
