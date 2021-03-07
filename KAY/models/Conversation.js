@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const scenarioSchema = require('./Scenario')
 
 const conversationSchema = new Schema({
     startConversationDate: {
@@ -9,13 +10,13 @@ const conversationSchema = new Schema({
         type: Date,
         required: true
     },
-    userInput:{
+    userInput: {
         type: String,
         required: true
     },
-    intent: intentShcema,
-    entity: entitySchema,
-    kayOutput: scenarioSchema
+    // intent: intentShcema,
+    // entity: entitySchema,
+    // kayOutput: { type: scenarioSchema}
 })
 
 module.exports = model('conversations', conversationSchema);

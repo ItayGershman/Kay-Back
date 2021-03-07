@@ -2,6 +2,7 @@ const express = require('express');
 var router = express.Router();
 const { userController } = require('../controller/userController')
 const { locationController } = require('../controller/locationController')
+const { scenarioController } = require('../controller/scenarioController')
 
 //User routes
 router.post('/createUser', (req, res) => {
@@ -36,4 +37,22 @@ router.post('/setLocation', (req, res) => {
 router.delete('/deleteLocation', (req, res) => {
     locationController.deleteLocation(req, res);
 });
+
+//Scenario routes
+router.post('/createScenario', (req, res) => {
+    scenarioController.createScenario(req, res);
+});
+
+router.get('/getScenario', (req, res) => {
+    scenarioController.getScenario(req, res);
+});
+
+router.post('/setScenario', (req, res) => {
+    scenarioController.setScenario(req, res);
+});
+
+router.delete('/deleteScenario', (req, res) => {
+    scenarioController.deleteScenario(req, res);
+});
+
 module.exports = router

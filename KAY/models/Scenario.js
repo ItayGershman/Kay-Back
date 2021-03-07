@@ -1,11 +1,12 @@
 const { Schema, model } = require('mongoose');
+const Conversation = require('./Conversation')
 
 const scenarioSchema = new Schema({
     scenarioName: {
         type: String,
         required: true
     },
-    outputOptions:[ {
+    outputOptions: [{
         type: Array,
         required: true
     }],
@@ -22,9 +23,9 @@ const scenarioSchema = new Schema({
         deviceID: Number
     }],
     kayDestination: [{
-        type:Array
+        type: Array
     }],
-    children: conversationSchema // ??? need to check if needed here
+    // children: Conversation// ??? need to check if needed here
 })
 
 module.exports = model('scenarios', scenarioSchema);
