@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const consts = require('../consts');
 
 const { DB_HOST, DB_USER, DB_PASS } = consts;
-console.log(DB_HOST)
 const url = `${DB_HOST}`;
 const options = {
     useNewUrlParser: true,
