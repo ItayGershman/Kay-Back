@@ -5,36 +5,36 @@ const { locationController } = require('../controller/locationController')
 const { scenarioController } = require('../controller/scenarioController')
 
 //User routes
-router.post('/createUser', (req, res) => {
+router.post('/user', (req, res) => {
     userController.createUser(req, res);
 });
 
-router.get('/getUser', (req, res) => {
+router.get('/user', (req, res) => {
     userController.getUser(req, res);
 });
 
-router.post('/setUser', (req, res) => {
+router.put('/user', (req, res) => {
     userController.setUser(req, res);
 });
 
-router.delete('/deleteUser', (req, res) => {
+router.delete('/user', (req, res) => {
     userController.deleteUser(req, res);
 });
 
 //Location routes
-router.post('/createLocation', (req, res) => {
+router.post('/location', (req, res) => {
     locationController.createLocation(req, res);
 });
 
-router.get('/getLocation', (req, res) => {
+router.get('/location', (req, res) => {
     locationController.getLocation(req, res);
 });
 
-router.post('/setLocation', (req, res) => {
+router.put('/location', (req, res) => {
     locationController.setLocation(req, res);
 });
 
-router.delete('/deleteLocation', (req, res) => {
+router.delete('/location', (req, res) => {
     locationController.deleteLocation(req, res);
 });
 
