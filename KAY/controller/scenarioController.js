@@ -1,5 +1,5 @@
 const Scenario = require('../models/Scenario')
-console.log('inside controller')
+
 exports.scenarioController = {
     async createScenario(req, res) {
         try {
