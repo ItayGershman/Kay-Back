@@ -38,7 +38,7 @@ router.delete('/location', (req, res) => {
     locationController.deleteLocation(req, res);
 });
 
-//Scenario routes
+//Scenario routes --> need to recode this
 router.post('/createScenario', (req, res) => {
     scenarioController.createScenario(req, res);
 });
