@@ -5,11 +5,7 @@ exports.scenarioController = {
         try {
             scenario = new Scenario({
                 scenarioName: req.body.scenarioName,
-                outputOptions: req.body.outputOptions,
-                receiveIntent: req.body.receiveIntent,
-                scenarioActions: req.body.scenarioActions,
-                kayDestination: req.body.kayDestination,
-                // children: req.body.conversationSchema
+                step: req.body.step
             });
             await scenario.save(err => {
                 if (err) {
@@ -25,8 +21,8 @@ exports.scenarioController = {
     },
     async getScenario(req, res) {
         try {
-            const scenario = await Scenario.findOne({ scenarioName: req.body.scenarioName })
-            if (scenario) res.status(200).json(scenario.scenarioName)
+            const scenario = await Scenario.findOne({ scenarioName: req.params.scenarioName })
+            if (scenario) res.status(200).json(scenario)
             else res.status(400).send(`Did not find scenario with this name`);
         } catch (err) {
             console.log(err)
@@ -35,18 +31,14 @@ exports.scenarioController = {
     },
     async setScenario(req, res) {
         try {
-            if (req.body.scenarioName === undefined)
+            if (req.params.scenarioName === undefined)
                 return res.status(400).send(`Scenario name is wrong`);
             await Scenario.updateOne(
-                { scenarioName: req.body.scenarioName },
+                { scenarioName: req.params.scenarioName },
                 {
                     $set: {
                         scenarioName: req.body.scenarioName,
-                        outputOptions: req.body.outputOptions,
-                        receiveIntent: req.body.receiveIntent,
-                        scenarioActions: req.body.scenarioActions,
-                        kayDestination: req.body.kayDestination,
-                        // children: req.body.conversationSchema
+                        step: req.body.step
                     }
                 },
                 (err, result) => {

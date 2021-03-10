@@ -7,26 +7,7 @@ const scenarioSchema = new Schema({
     },
     step: {
         type: Number
-    },
-    // recivedIntent: {
-    //     type: String,
-    //     name: String
-    // },
-    // scenarioActions: [{ // need to be array of actionschema
-    //     type: Array,
-    //     required: true,
-    //     title: String,
-    //     titleID: Number,
-    //     deviceName: String,
-    //     deviceID: Number
-    // }],
-    // kayDestination: [{
-    //     type: Array
-    // }],
-    // children: {
-    //     type: Array,
-    //     scenarioData: Object
-    // }
+    }
 })
 
 module.exports = model('scenarios', scenarioSchema);

@@ -23,8 +23,11 @@ exports.userController = {
     },
     async getUser(req, res) {
         try {
-            const user = await User.findOne({ userEmail: req.body.userEmail })
-            if (user) res.status(200).json(user.firstName + " " + user.lastName)
+            const user = await User.findOne({ userEmail: req.params.userEmail })
+            if (user){
+                res.header('Cache-Control', 'no-store');
+                res.status(200).json(user.firstName + " " + user.lastName)
+            } 
             else res.status(400).send(`Did not find user with this email`);
         } catch (err) {
             console.log(err)
@@ -32,12 +35,11 @@ exports.userController = {
         }
     },
     async setUser(req, res) {
-        console.log(`req.body:${JSON.stringify(req.body)}`)
         try {
-            if (req.body.userEmail === undefined)
+            if (req.params.userEmail === undefined)
                 return res.status(400).send(`Email is wrong`);
             await User.updateOne(
-                { userEmail: req.body.userEmail },
+                { userEmail: req.params.userEmail },
                 {
                     $set: {
                         firstName: req.body.firstName,
@@ -60,10 +62,10 @@ exports.userController = {
     },
     async deleteUser(req, res) {
         try {
-            if (req.body.userEmail === undefined)
+            if (req.params.userEmail === undefined)
                 return res.status(400).send(`Email is wrong`);
             await User.deleteOne(
-                { userEmail: req.body.userEmail },
+                { userEmail: req.params.userEmail },
                 (err, result) => {
                     if (err) res.status(400).send(`${err}`)
                     else {

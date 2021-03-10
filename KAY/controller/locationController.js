@@ -23,8 +23,8 @@ exports.locationController = {
     },
     async getLocation(req, res) {
         try {
-            const location = await Location.findOne({ locationName: req.body.locationName })
-            if (location) res.status(200).json(location.locationName)
+            const location = await Location.findOne({ locationName: req.params.locationName })
+            if (location) res.status(200).json(location)
             else res.status(400).send(`Did not find location with this name`);
         } catch (err) {
             console.log(err)
@@ -33,10 +33,10 @@ exports.locationController = {
     },
     async setLocation(req, res) {
         try {
-            if (req.body.locationName === undefined)
+            if (req.params.locationName === undefined)
                 return res.status(400).send(`Location name is wrong`);
             await Location.updateOne(
-                { locationName: req.body.locationName },
+                { locationName: req.params.locationName },
                 {
                     $set: {
                         locationName: req.body.locationName,
@@ -59,10 +59,10 @@ exports.locationController = {
     },
     async deleteLocation(req, res) {
         try {
-            if (req.body.locationName === undefined)
+            if (req.params.locationName === undefined)
                 return res.status(400).send(`Location name is wrong`);
             await Location.deleteOne(
-                { locationName: req.body.locationName },
+                { locationName: req.params.locationName },
                 (err, result) => {
                     if (err) res.status(400).send(`${err}`)
                     else {

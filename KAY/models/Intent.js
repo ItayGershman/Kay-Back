@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const intentSchema = new Schema({
-    scnearioConnection: {
+    scenarioConnection: {
         type: String
     },
     intentName: {
