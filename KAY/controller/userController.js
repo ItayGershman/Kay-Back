@@ -1,21 +1,46 @@
 const User = require('../models/User')
+const { getToken } = require('../utils')
 
 exports.userController = {
+
+    async signIn(req, res) {
+        const signinUser = await User.findOne({
+            userEmail: req.body.userEmail,
+            userPassword: req.body.userPassword,
+        });
+        if (signinUser) {
+            res.send({
+                _id: signinUser._id,
+                firstName: signinUser.firstName,
+                lastName: signinUser.lastName,
+                userEmail: signinUser.userEmail,
+                token: getToken(signinUser),
+            });
+        } else {
+            res.status(401).send({ msg: 'Invalid email or password' });
+        }
+    },
+
     async createUser(req, res) {
         try {
-            user = new User({
+            const user = new User({
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 userPassword: req.body.userPassword,
                 userEmail: req.body.userEmail
-            });
-            await user.save(err => {
-                if (err) {
-                    res.status(500).send(`${err}`);
-                } else {
-                    res.status(200).json(user)
-                }
-            });
+              });
+            const newUser = await user.save();
+            if (newUser) {
+              res.status(201).send({
+                _id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                isAdmin: newUser.isAdmin,
+                token: getToken(newUser),
+              });
+            } else {
+              res.status(401).send({ msg: 'Invalid User Data' });
+            }
         } catch (err) {
             console.log(err)
             res.status(500).send(err)
@@ -24,10 +49,10 @@ exports.userController = {
     async getUser(req, res) {
         try {
             const user = await User.findOne({ userEmail: req.params.userEmail })
-            if (user){
+            if (user) {
                 res.header('Cache-Control', 'no-store');
                 res.status(200).json(user.firstName + " " + user.lastName)
-            } 
+            }
             else res.status(400).send(`Did not find user with this email`);
         } catch (err) {
             console.log(err)
