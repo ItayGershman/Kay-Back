@@ -5,7 +5,12 @@ const { locationController } = require('../controller/locationController')
 const { scenarioController } = require('../controller/scenarioController')
 const { intentController } = require('../controller/intentController')
 
+
 //User routes
+router.post('/signin', async (req, res) => {
+    userController.signIn(req, res);
+});
+
 router.post('/user', (req, res) => {
     userController.createUser(req, res);
 });
