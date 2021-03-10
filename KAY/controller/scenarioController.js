@@ -5,7 +5,6 @@ exports.scenarioController = {
         try {
             scenario = new Scenario({
                 scenarioName: req.body.scenarioName,
-                step: req.body.step
             });
             await scenario.save(err => {
                 if (err) {
@@ -38,7 +37,6 @@ exports.scenarioController = {
                 {
                     $set: {
                         scenarioName: req.body.scenarioName,
-                        step: req.body.step
                     }
                 },
                 (err, result) => {
