@@ -4,6 +4,7 @@ const { userController } = require('../controller/userController')
 const { locationController } = require('../controller/locationController')
 const { scenarioController } = require('../controller/scenarioController')
 const { intentController } = require('../controller/intentController')
+const { scenarioConfigController } = require('../controller/scenarioConfigController')
 
 
 //User routes
@@ -42,6 +43,15 @@ router.put('/location/:locationName', (req, res) => {
 
 router.delete('/location/:locationName', (req, res) => {
     locationController.deleteLocation(req, res);
+});
+
+//Scenario Configuration routes
+router.post('/scenario_config', (req, res) => {
+    scenarioConfigController.createScenarioConfig(req, res);
+});
+
+router.get('/scenario_config/:_id', (req, res) => {
+    scenarioConfigController.getScenarioConfig(req, res);
 });
 
 //Scenario routes
