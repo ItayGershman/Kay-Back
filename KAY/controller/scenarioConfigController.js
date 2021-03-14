@@ -28,45 +28,45 @@ exports.scenarioConfigController = {
             res.status(500).send(err)
         }
     },
-    // async setScenario(req, res) {
-    //     try {
-    //         if (req.params.scenarioName === undefined)
-    //             return res.status(400).send(`Scenario name is wrong`);
-    //         await Scenario.updateOne(
-    //             { scenarioName: req.params.scenarioName },
-    //             {
-    //                 $set: {
-    //                     scenarioName: req.body.scenarioName,
-    //                 }
-    //             },
-    //             (err, result) => {
-    //                 if (err) res.status(400).send(`${err}`)
-    //                 else {
-    //                     return res.status(200).json(true);
-    //                 }
-    //             }
-    //         );
-    //     } catch (err) {
-    //         console.log(err)
-    //         res.status(500).send(`${err}`);
-    //     }
-    // },
-    // async deleteScenario(req, res) {
-    //     try {
-    //         if (req.body.scenarioName === undefined)
-    //             return res.status(400).send(`Scenario name is wrong`);
-    //         await Scenario.deleteOne(
-    //             { scenarioName: req.body.scenarioName },
-    //             (err, result) => {
-    //                 if (err) res.status(400).send(`${err}`)
-    //                 else {
-    //                     return res.status(200).send(`Scenario Deleted Successfuly`);
-    //                 }
-    //             }
-    //         );
-    //     } catch (err) {
-    //         console.log(err)
-    //         res.status(500).send(`${err}`);
-    //     }
-    // },
+    async setScenarioConfig(req, res) {
+        try {
+            if (req.params._id === undefined)
+                return res.status(400).send(`Scenario id is wrong`);
+            await ScenarioConfig.updateOne(
+                { _id: req.params._id },
+                {
+                    $set: {
+                        scenarioConfigData: req.body.scenarioConfigData,
+                    }
+                },
+                (err, result) => {
+                    if (err) res.status(400).send(`${err}`)
+                    else {
+                        return res.status(200).json(true);
+                    }
+                }
+            );
+        } catch (err) {
+            console.log(err)
+            res.status(500).send(`${err}`);
+        }
+    },
+    async deleteScenarioConfig(req, res) {
+        try {
+            if (req.params._id === undefined)
+                return res.status(400).send(`Scenario id is wrong`);
+            await ScenarioConfig.deleteOne(
+                { _id: req.params._id },
+                (err, result) => {
+                    if (err) res.status(400).send(`${err}`)
+                    else {
+                        return res.status(200).send(`Scenario config Deleted Successfuly`);
+                    }
+                }
+            );
+        } catch (err) {
+            console.log(err)
+            res.status(500).send(`${err}`);
+        }
+    },
 }

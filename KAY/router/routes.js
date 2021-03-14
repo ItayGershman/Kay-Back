@@ -54,6 +54,14 @@ router.get('/scenario_config/:_id', (req, res) => {
     scenarioConfigController.getScenarioConfig(req, res);
 });
 
+router.put('/scenario_config/:_id', (req, res) => {
+    scenarioConfigController.setScenarioConfig(req, res);
+});
+
+router.delete('/scenario_config/:_id', (req, res) => {
+    scenarioConfigController.deleteScenarioConfig(req, res);
+});
+
 //Scenario routes
 router.post('/scenario', (req, res) => {
     scenarioController.createScenario(req, res);
