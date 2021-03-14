@@ -5,6 +5,8 @@ exports.scenarioController = {
         try {
             scenario = new Scenario({
                 scenarioName: req.body.scenarioName,
+                scenarioDescription: req.body.scenarioDescription,
+                scenarioImage: req.body.scenarioImage
             });
             await scenario.save(err => {
                 if (err) {
@@ -37,6 +39,8 @@ exports.scenarioController = {
                 {
                     $set: {
                         scenarioName: req.body.scenarioName,
+                        scenarioDescription: req.body.scenarioDescription,
+                        scenarioImage: req.body.scenarioImage
                     }
                 },
                 (err, result) => {
