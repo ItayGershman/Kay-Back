@@ -1,3 +1,4 @@
+const { spawn } = require('child_process');
 const Location = require('../models/Location')
 
 exports.locationController = {
@@ -24,7 +25,25 @@ exports.locationController = {
     async getLocation(req, res) {
         try {
             const location = await Location.findOne({ locationName: req.params.locationName })
-            if (location) res.status(200).json(location)
+            if (location) {
+                //Check python script
+                var dataToSend;
+                // spawn new child process to call the python script
+                const python = spawn('python', ['script.py', req.params.locationName]);
+                // collect data from script
+                python.stdout.on('data', function (data) {
+                    console.log('Pipe data from python script ...');
+                    dataToSend = data.toString();
+                });
+                // in close event we are sure that stream from child process is closed
+                python.on('close', (code) => {
+                    console.log(`child process close all stdio with code ${code}`);
+                    console.log('dataTosend:', dataToSend)
+                });
+
+                res.status(200).json(location)
+
+            }
             else res.status(400).send(`Did not find location with this name`);
         } catch (err) {
             console.log(err)

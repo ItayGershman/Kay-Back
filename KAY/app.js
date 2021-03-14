@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const logger = require("morgan");
 const routes = require('./router/routes');
+// const { spawn } = require('child_process');
 
 const port = process.env.PORT || 3030;
 
@@ -26,10 +27,32 @@ app.get("/", (req, res) => {
     res.status(200).send(`Welcome to KAY`);
 });
 
+
+
+//Check python script
+// app.get('/python', (req, res) => {
+
+//     var dataToSend;
+//     // spawn new child process to call the python script
+//     const python = spawn('python', ['script.py', 'Aviel', 'Itay']);
+//     // collect data from script
+//     python.stdout.on('data', function (data) {
+//         console.log('Pipe data from python script ...');
+//         dataToSend = data.toString();
+//     });
+//     // in close event we are sure that stream from child process is closed
+//     python.on('close', (code) => {
+//         console.log(`child process close all stdio with code ${code}`);
+//         // send data to browser
+//         // res.send(dataToSend)
+//         console.log(dataToSend)
+//         res.json(dataToSend)
+//     });
+// })
+
 app.get("*", (req, res) => {
     res.status(404).send(`Page Not Found`);
 });
-
 
 app.use((err, res) => {
     res.status(500).send(err);
