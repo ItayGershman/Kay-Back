@@ -4,20 +4,25 @@ const { getToken } = require('../utils')
 exports.userController = {
 
     async signIn(req, res) {
-        const signinUser = await User.findOne({
-            userEmail: req.body.userEmail,
-            userPassword: req.body.userPassword,
-        });
-        if (signinUser) {
-            res.send({
-                _id: signinUser._id,
-                firstName: signinUser.firstName,
-                lastName: signinUser.lastName,
-                userEmail: signinUser.userEmail,
-                token: getToken(signinUser),
+        try {
+            const signinUser = await User.findOne({
+                userEmail: req.body.userEmail,
+                userPassword: req.body.userPassword,
             });
-        } else {
-            res.status(401).send({ msg: 'Invalid email or password' });
+            if (signinUser) {
+                res.send({
+                    _id: signinUser._id,
+                    firstName: signinUser.firstName,
+                    lastName: signinUser.lastName,
+                    userEmail: signinUser.userEmail,
+                    token: getToken(signinUser),
+                });
+            } else {
+                res.status(401).send({ msg: 'Invalid email or password' });
+            }
+        } catch (err) {
+            console.log(err)
+            res.status(500).send(err)
         }
     },
 
@@ -28,18 +33,18 @@ exports.userController = {
                 lastName: req.body.lastName,
                 userPassword: req.body.userPassword,
                 userEmail: req.body.userEmail
-              });
+            });
             const newUser = await user.save();
             if (newUser) {
-              res.status(201).send({
-                _id: newUser._id,
-                name: newUser.name,
-                email: newUser.email,
-                isAdmin: newUser.isAdmin,
-                token: getToken(newUser),
-              });
+                res.status(201).send({
+                    _id: newUser._id,
+                    name: newUser.name,
+                    email: newUser.email,
+                    isAdmin: newUser.isAdmin,
+                    token: getToken(newUser),
+                });
             } else {
-              res.status(401).send({ msg: 'Invalid User Data' });
+                res.status(401).send({ msg: 'Invalid User Data' });
             }
         } catch (err) {
             console.log(err)
