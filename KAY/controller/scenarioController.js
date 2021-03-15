@@ -32,7 +32,7 @@ exports.scenarioController = {
     },
     async getAllScenarios(req, res) {
         try {
-            const filter= {}
+            const filter = {}
             const scenario = await Scenario.find(filter)
             if (scenario) res.status(200).json(scenario)
             else res.status(400).send(`Did not find scenario in the collection`);
@@ -68,10 +68,12 @@ exports.scenarioController = {
     },
     async deleteScenario(req, res) {
         try {
-            if (req.body.scenarioName === undefined)
+            const scenario = await Scenario.findOne({ scenarioName: req.params.scenarioName })
+            if (scenario === null) {
                 return res.status(400).send(`Scenario name is wrong`);
+            }
             await Scenario.deleteOne(
-                { scenarioName: req.body.scenarioName },
+                { scenarioName: req.params.scenarioName },
                 (err, result) => {
                     if (err) res.status(400).send(`${err}`)
                     else {
