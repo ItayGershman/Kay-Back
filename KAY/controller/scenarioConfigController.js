@@ -4,6 +4,7 @@ exports.scenarioConfigController = {
     async createScenarioConfig(req, res) {
         try {
             scenario = new ScenarioConfig({
+                scenarioConfigName: req.body.scenarioConfigName,
                 scenarioConfigData: req.body.scenarioConfigData,
             });
             await scenario.save(err => {
@@ -20,9 +21,11 @@ exports.scenarioConfigController = {
     },
     async getScenarioConfig(req, res) {
         try {
-            const scenario = await ScenarioConfig.findById({ _id: req.params._id })
+            console.log(req.params.scenarioConfigName)
+            const scenario = await ScenarioConfig.findOne({ scenarioConfigName: req.params.scenarioConfigName })
+            console.log(scenario)
             if (scenario) res.status(200).json(scenario)
-            else res.status(400).send(`Did not find scenario with this name`);
+            else res.status(400).send(`Did not find scenario config with this name`);
         } catch (err) {
             console.log(err)
             res.status(500).send(err)
@@ -30,12 +33,13 @@ exports.scenarioConfigController = {
     },
     async setScenarioConfig(req, res) {
         try {
-            if (req.params._id === undefined)
-                return res.status(400).send(`Scenario id is wrong`);
+            if (req.params.scenarioConfigName === undefined)
+                return res.status(400).send(`scenarioConfigName is wrong`);
             await ScenarioConfig.updateOne(
-                { _id: req.params._id },
+                { scenarioConfigName: req.params.scenarioConfigName },
                 {
                     $set: {
+                        scenarioConfigName: req.body.scenarioConfigName,
                         scenarioConfigData: req.body.scenarioConfigData,
                     }
                 },
@@ -53,10 +57,10 @@ exports.scenarioConfigController = {
     },
     async deleteScenarioConfig(req, res) {
         try {
-            if (req.params._id === undefined)
-                return res.status(400).send(`Scenario id is wrong`);
+            if (req.params.scenarioConfigName === undefined)
+                return res.status(400).send(`scenarioConfigName is wrong`);
             await ScenarioConfig.deleteOne(
-                { _id: req.params._id },
+                { scenarioConfigName: req.params.scenarioConfigName },
                 (err, result) => {
                     if (err) res.status(400).send(`${err}`)
                     else {

@@ -50,15 +50,15 @@ router.post('/scenario_config', (req, res) => {
     scenarioConfigController.createScenarioConfig(req, res);
 });
 
-router.get('/scenario_config/:_id', (req, res) => {
+router.get('/scenario_config/:scenarioConfigName', (req, res) => {
     scenarioConfigController.getScenarioConfig(req, res);
 });
 
-router.put('/scenario_config/:_id', (req, res) => {
+router.put('/scenario_config/:scenarioConfigName', (req, res) => {
     scenarioConfigController.setScenarioConfig(req, res);
 });
 
-router.delete('/scenario_config/:_id', (req, res) => {
+router.delete('/scenario_config/:scenarioConfigName', (req, res) => {
     scenarioConfigController.deleteScenarioConfig(req, res);
 });
 
