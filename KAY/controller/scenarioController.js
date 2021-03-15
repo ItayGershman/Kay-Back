@@ -30,6 +30,17 @@ exports.scenarioController = {
             res.status(500).send(err)
         }
     },
+    async getAllScenarios(req, res) {
+        try {
+            const filter= {}
+            const scenario = await Scenario.find(filter)
+            if (scenario) res.status(200).json(scenario)
+            else res.status(400).send(`Did not find scenario in the collection`);
+        } catch (err) {
+            console.log(err)
+            res.status(500).send(err)
+        }
+    },
     async setScenario(req, res) {
         try {
             if (req.params.scenarioName === undefined)

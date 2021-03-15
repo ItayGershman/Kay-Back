@@ -70,7 +70,9 @@ router.post('/scenario', (req, res) => {
 router.get('/scenario/:scenarioName', (req, res) => {
     scenarioController.getScenario(req, res);
 });
-
+router.get('/scenario', (req, res) => {
+    scenarioController.getAllScenarios(req, res);
+});
 router.put('/scenario/:scenarioName', (req, res) => {
     scenarioController.setScenario(req, res);
 });
