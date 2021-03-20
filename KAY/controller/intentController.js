@@ -30,6 +30,27 @@ exports.intentController = {
             res.status(500).send(err)
         }
     },
+    async getAllIntents(req, res) {
+        try {
+            const filter={}
+            const intent = await Intent.find(filter)
+            if (intent) res.status(200).json(intent)
+            else res.status(400).send(`Did not find intent in the colletion`);
+        } catch (err) {
+            console.log(err)
+            res.status(500).send(err)
+        }
+    },
+    async getIntentsByScenraio(req, res) {
+        try {
+            const intent = await Intent.find({scenarioConnection: req.params.scenarioConnection})
+            if (intent) res.status(200).json(intent)
+            else res.status(400).send(`Did not find intent in the colletion`);
+        } catch (err) {
+            console.log(err)
+            res.status(500).send(err)
+        }
+    },
     async setIntent(req, res) {
         try {
             if (req.params.scenarioConnection === undefined || req.params.intentName === undefined)
