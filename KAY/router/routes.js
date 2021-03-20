@@ -90,6 +90,10 @@ router.get('/intent/:scenarioConnection/:intentName', (req, res) => {
     intentController.getIntent(req, res);
 });
 
+router.get('/intent', (req, res) => {
+    intentController.getAllIntents(req, res);
+});
+
 router.put('/intent/:scenarioConnection/:intentName', (req, res) => {
     intentController.setIntent(req, res);
 });
