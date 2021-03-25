@@ -6,7 +6,8 @@ exports.intentController = {
             intent = new Intent({
                 scenarioConnection: req.body.scenarioConnection,
                 intentName: req.body.intentName,
-                outputTextIntent: req.body.outputTextIntent
+                outputTextIntent: req.body.outputTextIntent,
+                entities: req.body.entities
             });
             await intent.save(err => {
                 if (err) {
@@ -61,7 +62,8 @@ exports.intentController = {
                     $set: {
                         scenarioConnection: req.body.scenarioConnection,
                         intentName: req.body.intentName,
-                        outputTextIntent: req.body.outputTextIntent
+                        outputTextIntent: req.body.outputTextIntent,
+                        entities: req.body.entities
                     }
                 },
                 (err, result) => {
