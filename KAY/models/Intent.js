@@ -11,6 +11,10 @@ const intentSchema = new Schema({
     outputTextIntent: {
         type: Array,
         outputValue: [String]
+    },
+    entities: {
+        type: Array,
+        entitiesNode : [String]
     }
 })
 
