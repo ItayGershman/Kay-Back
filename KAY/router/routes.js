@@ -5,7 +5,7 @@ const { locationController } = require('../controller/locationController')
 const { scenarioController } = require('../controller/scenarioController')
 const { intentController } = require('../controller/intentController')
 const { scenarioConfigController } = require('../controller/scenarioConfigController')
-
+const { conversationController } = require('../controller/conversationController')
 
 //User routes
 router.post('/signin', async (req, res) => {
@@ -104,6 +104,23 @@ router.put('/intent/:scenarioConnection/:intentName', (req, res) => {
 
 router.delete('/intent/:scenarioConnection/:intentName', (req, res) => {
     intentController.deleteIntent(req, res);
+});
+
+//Conversation routes
+router.post('/conversation', (req, res) => {
+    conversationController.createConversation(req, res);
+});
+
+router.get('/conversation/:date/:title', (req, res) => {
+    conversationController.getConversation(req, res);
+});
+
+router.get('/conversation', (req, res) => {
+    conversationController.getAllConversations(req, res);
+});
+
+router.delete('/conversation/:date/:title', (req, res) => {
+    conversationController.deleteConversation(req, res);
 });
 
 module.exports = router

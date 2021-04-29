@@ -1,22 +1,18 @@
 const { Schema, model } = require('mongoose');
-const scenarioSchema = require('./Scenario')
 
 const conversationSchema = new Schema({
-    startConversationDate: {
-        type: Date,
-        required: true
-    },
-    endConversationDate: {
-        type: Date,
-        required: true
-    },
-    userInput: {
+    date: {
         type: String,
         required: true
     },
-    // intent: intentShcema,
-    // entity: entitySchema,
-    // kayOutput: { type: scenarioSchema}
+    title: {
+        type: String,
+        required: true
+    },
+    text: {
+        type: Object,
+        required: true
+    }
 })
 
 module.exports = model('conversations', conversationSchema);
