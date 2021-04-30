@@ -15,6 +15,9 @@ const intentSchema = new Schema({
     entities: {
         type: Array,
         entitiesNode : [String]
+    },
+    action: {
+        type: Object
     }
 })
 
