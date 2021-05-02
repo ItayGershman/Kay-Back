@@ -61,11 +61,11 @@ exports.intentController = {
                 { scenarioConnection: req.params.scenarioConnection, intentName: req.params.intentName },
                 {
                     $set: {
-                        scenarioConnection: req.params.scenarioConnection,
-                        intentName: req.params.intentName,
-                        outputTextIntent: req.params.outputTextIntent,
-                        entities: req.params.entities,
-                        action: req.params.action
+                        scenarioConnection: req.body.scenarioConnection,
+                        intentName: req.body.intentName,
+                        outputTextIntent: req.body.outputTextIntent,
+                        entities: req.body.entities,
+                        action: req.body.action
                     }
                 },
                 (err, result) => {
