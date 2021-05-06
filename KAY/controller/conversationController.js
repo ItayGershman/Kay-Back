@@ -6,9 +6,11 @@ exports.conversationController = {
     async createConversation(req, res) {
         try {
             let date = moment(new Date()).format("DD/MM/YYYY");
+            const filter = {}
+            let count = await Conversation.find(filter).count()
             conversation = new Conversation({
                 date: date,
-                title: req.body.title,
+                title: `${date}-${count + 1}` ,
                 text: req.body.text
             });
             await conversation.save(err => {
