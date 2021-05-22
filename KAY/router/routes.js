@@ -37,6 +37,10 @@ router.get('/location/:locationName', (req, res) => {
     locationController.getLocation(req, res);
 });
 
+router.get('/location', (req, res) => {
+    locationController.getAllLocations(req, res);
+});
+
 router.put('/location/:locationName', (req, res) => {
     locationController.setLocation(req, res);
 });

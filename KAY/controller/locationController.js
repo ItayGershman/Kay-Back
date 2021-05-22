@@ -34,6 +34,17 @@ exports.locationController = {
             res.status(500).send(err)
         }
     },
+    async getAllLocations(req, res) {
+        try {
+            const filter = {}
+            const location = await Location.find(filter)
+            if (location) res.status(200).json(location)
+            else res.status(400).send(`Did not find locations in the colletion`);
+        } catch (err) {
+            console.log(err)
+            res.status(500).send(err)
+        }
+    },
     async setLocation(req, res) {
         try {
             if (req.params.locationName === undefined)
