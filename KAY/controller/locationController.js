@@ -6,9 +6,10 @@ exports.locationController = {
         try {
             location = new Location({
                 locationName: req.body.locationName,
-                fromPosition: req.body.fromPosition,
-                xFromCurrPosition: req.body.xFromCurrPosition,
-                yFromCurrPosition: req.body.yFromCurrPosition
+                toPosition: req.body.toPosition,
+                x: req.body.x,
+                y: req.body.y,
+                RFID: req.body.RFID
             });
             await location.save(err => {
                 if (err) {
@@ -54,9 +55,10 @@ exports.locationController = {
                 {
                     $set: {
                         locationName: req.body.locationName,
-                        fromPosition: req.body.fromPosition,
-                        xFromCurrPosition: req.body.xFromCurrPosition,
-                        yFromCurrPosition: req.body.yFromCurrPosition
+                        toPosition: req.body.toPosition,
+                        x: req.body.x,
+                        y: req.body.y,
+                        RFID: req.body.RFID
                     }
                 },
                 (err, result) => {

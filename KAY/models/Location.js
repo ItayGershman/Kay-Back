@@ -5,16 +5,20 @@ const locationSchema = new Schema({
         type: String,
         required: true
     },
-    fromPosition: {
+    toPosition: {
         type: String,
         required: true
     },
-    xFromCurrPosition: {
+    x: {
         type: Number,
         required: true
     },
-    yFromCurrPosition: {
+    y: {
         type: Number,
+        required: true
+    },
+    RFID:{
+        type: String,
         required: true
     }
 })
