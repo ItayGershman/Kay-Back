@@ -21,7 +21,9 @@ exports.scenarioConfigController = {
     },
     async getScenarioConfig(req, res) {
         try {
+            console.log(req.params.scenarioConfigName)
             const scenario = await ScenarioConfig.findOne({ scenarioConfigName: req.params.scenarioConfigName })
+            console.log(scenario)
             if (scenario) res.status(200).json(scenario)
             else res.status(400).send(`Did not find scenario config with this name`);
         } catch (err) {
@@ -37,7 +39,7 @@ exports.scenarioConfigController = {
                 { scenarioConfigName: req.params.scenarioConfigName },
                 {
                     $set: {
-                        scenarioConfigName: req.params.scenarioConfigName,
+                        scenarioConfigName: req.body.scenarioConfigName,
                         scenarioConfigData: req.body.scenarioConfigData,
                     }
                 },
